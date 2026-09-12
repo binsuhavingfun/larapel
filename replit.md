@@ -1,6 +1,6 @@
-# [Project name]
+# Larapel
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Larapel turns browser-camera moments into small, shareable retro photobooth keepsakes with a note.
 
 ## Run & Operate
 
@@ -22,23 +22,36 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/larapel/src/` — React pages, shared UI, strip preview, canvas download composition, and QR rendering
+- `artifacts/api-server/src/routes/strips.ts` — anonymous session strip API, note sanitization, and rate limiting
+- `lib/api-spec/openapi.yaml` — source of truth for the strip API contract
+- `lib/db/src/schema/strips.ts` — PostgreSQL schema for strip metadata and captured image data URLs
+- `artifacts/larapel/src/index.css` — Larapel visual theme and motion utilities
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Anonymous sessions use a long-lived httpOnly `larapel_session` cookie; no account flow is required for the MVP.
+- Finished photos are stored as data URLs in PostgreSQL for the MVP to keep the capture/save path lean; the API exposes only unguessable strip IDs for sharing.
+- The frontend derives the visible share URL from the current browser origin so QR codes and copy links work through the preview proxy and on a published domain.
+- The client composes a downloadable PNG in the browser, while the server stores the original captured frames and note metadata.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Landing page with Larapel branding and privacy note
+- Mobile-first capture flow for 1–4 photos with retake/remove support
+- Mono or sepia treatment, front/back note placement, and 180-character note limit
+- Downloadable composed strip, native share/copy actions, and a real QR code
+- Public share pages and anonymous session history
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+No additional preferences recorded.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- After changing `lib/api-spec/openapi.yaml`, run `pnpm --filter @workspace/api-spec run codegen` before using generated hooks or Zod schemas.
+- API routes are mounted under `/api`; the frontend uses generated hooks from `@workspace/api-client-react`.
+- `Headers.entries()` in generated client code requires `dom.iterable` in the client library TypeScript `lib` list.
 
 ## Pointers
 

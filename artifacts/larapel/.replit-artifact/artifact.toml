@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Larapel"
+description = "A phone-friendly retro photobooth app where people capture up to four photos, add a short note, and create a branded shareable strip with a QR link."
+version = "1.0.0"
+id = "artifacts/larapel"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22752
+
+[services.development]
+run = "pnpm --filter @workspace/larapel run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/larapel", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/larapel/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22752"
+BASE_PATH = "/"

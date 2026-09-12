@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: strips
+    description: Photobooth strip operations
 paths:
   /healthz:
     get:
@@ -24,7 +26,80 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /strips:
+    get:
+      operationId: listStrips
+      tags: [strips]
+      summary: List the current session's strips
+      responses:
+        "200":
+          description: Strips created in the current anonymous session
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StripSummary"
+    post:
+      operationId: createStrip
+      tags: [strips]
+      summary: Save a finished photobooth strip
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StripInput"
+      responses:
+        "201":
+          description: Saved strip
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Strip"
+        "400":
+          description: Invalid strip input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: Too many strips created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /strips/{id}:
+    get:
+      operationId: getStrip
+      tags: [strips]
+      summary: Get a shareable strip
+      parameters:
+        - $ref: "#/components/parameters/StripId"
+      responses:
+        "200":
+          description: Shareable strip
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Strip"
+        "404":
+          description: Strip not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
+  parameters:
+    StripId:
+      name: id
+      in: path
+      required: true
+      description: Un-guessable strip identifier
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 64
   schemas:
     HealthStatus:
       type: object
@@ -33,4 +108,66 @@ components:
           type: string
       required:
         - status
+    StripInput:
+      type: object
+      required:
+        - photos
+        - note
+        - placement
+        - filter
+      properties:
+        photos:
+          type: array
+          minItems: 1
+          maxItems: 4
+          items:
+            type: string
+            maxLength: 5000000
+        note:
+          type: string
+          maxLength: 180
+        placement:
+          type: string
+          enum: [front, back]
+        filter:
+          type: string
+          enum: [mono, sepia]
+    StripSummary:
+      type: object
+      required: [id, createdAt, photoCount, note, placement, filter]
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        photoCount:
+          type: integer
+        note:
+          type: string
+        placement:
+          type: string
+          enum: [front, back]
+        filter:
+          type: string
+          enum: [mono, sepia]
+    Strip:
+      allOf:
+        - $ref: "#/components/schemas/StripSummary"
+        - type: object
+          required: [photos]
+          properties:
+            photos:
+              type: array
+              items:
+                type: string
+            shareUrl:
+              type: string
+              format: uri
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
 
