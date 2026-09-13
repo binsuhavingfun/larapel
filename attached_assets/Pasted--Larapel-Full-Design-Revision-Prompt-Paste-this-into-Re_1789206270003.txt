@@ -1,0 +1,54 @@
+# Larapel — Full Design Revision Prompt
+
+Paste this into Replit's Agent to apply a full visual redesign across the app.
+
+---
+
+## Design System
+
+**Colors**
+- Background: warm white (#FAF8F5)
+- Primary text / headlines / primary buttons: black (#1A1A1A)
+- Secondary text / labels / dividers / secondary accents: vintage brown (#8B6F47)
+- No other colors. No red, no navy, no gradients, no shadows.
+
+**Typography**
+- One font family throughout, sans-serif only (e.g., Space Grotesk or General Sans)
+- Headlines: bold weight, black
+- Body/labels: regular/light weight, vintage brown or black depending on hierarchy
+- No serif fonts anywhere
+
+**Layout principles**
+- Single column, mobile-first, generous whitespace/padding
+- Thin 1px black or brown hairlines instead of boxes, cards, or drop shadows
+- Buttons: solid black or vintage brown fill, white text, flat (no shadow, no gradient)
+
+## Core Principle: No Wordiness, No Instructions
+
+Rewrite the entire UI to remove instructional/explanatory text. The app should be usable purely through visual cues, icons, and obvious placement — a first-time user should never need a sentence of guidance.
+
+Apply this to every screen:
+- Remove all instructional sentences (e.g., "Take one to four photos. Imperfect is the whole point.")
+- Remove the "FRAME 01/03" label
+- Replace the numbered step indicator with a plain thin progress bar (3 segments, vintage brown fill, no numbers or text)
+- Camera/capture screen: no instructional text at all — just the camera view and a shutter button (icon only)
+- Style screen: filter/style options shown as visual thumbnails the user taps — no explanatory copy, just the previews
+- Note + save screen: a single minimal text input with a placeholder like "add a note" (placeholder text only, not a full instruction), plus Save/Share buttons (icon + short label only, e.g., a download icon next to "Save")
+- Landing page: app name + one-line tagline max, then straight into the "make one" action — no feature list, no explanation paragraph
+
+## Specific Screen Fixes
+
+**Header:** Keep logo + app name + "make one" button, but restyle "make one" button to black fill, white text, no shadow.
+
+**Capture screen:**
+- Remove "FRAME 01/03" line
+- Remove the long subtext under the headline
+- Headline can stay short (e.g., "get in the frame.") or be removed entirely if the camera view alone is clear — your call in implementation, default to removing it for max minimalism
+- Step indicator: thin 3-segment progress bar in vintage brown, no numbers/text
+
+**Style screen:** Visual filter thumbnails only, tap to select, no labels beyond a tiny caption if absolutely necessary (e.g., "B&W", one word max per option).
+
+**Note + save screen:** One text input (placeholder "add a note"), placement toggle (front/back) shown as a simple icon toggle not a labeled dropdown, then Save + Share buttons.
+
+## Deliverable
+Apply this design system across all existing screens (capture, style, note+save, landing, share/QR page). Every screen should load fast, show no instructional paragraphs, and be understandable through visual design alone.
