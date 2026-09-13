@@ -52,9 +52,9 @@
 }
 
 :root {
-  --background: 36 33% 97%;
+  --background: 0 0% 100%;
   --foreground: 0 0% 10%;
-  --border: 30 32% 41%;
+  --border: 0 0% 54%;
   --input: 30 32% 41%;
   --ring: 30 32% 41%;
   --card: 36 33% 97%;
@@ -63,14 +63,14 @@
   --popover: 36 33% 97%;
   --popover-foreground: 0 0% 10%;
   --popover-border: 30 32% 41%;
-  --primary: 0 0% 10%;
-  --primary-foreground: 36 33% 97%;
-  --secondary: 30 32% 41%;
-  --secondary-foreground: 36 33% 97%;
-  --muted: 35 22% 89%;
-  --muted-foreground: 30 32% 41%;
-  --accent: 30 32% 41%;
-  --accent-foreground: 36 33% 97%;
+  --primary: 43 66% 54%;
+  --primary-foreground: 0 0% 10%;
+  --secondary: 0 0% 54%;
+  --secondary-foreground: 0 0% 10%;
+  --muted: 240 4% 96%;
+  --muted-foreground: 0 0% 54%;
+  --accent: 43 66% 54%;
+  --accent-foreground: 0 0% 10%;
   --destructive: 0 0% 10%;
   --destructive-foreground: 36 33% 97%;
   --sidebar: 36 33% 97%;
@@ -133,13 +133,13 @@
   }
 
   html {
-    background: #faf8f5;
+    background: #fff;
   }
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
     min-width: 320px;
-    background-color: #faf8f5;
+    background-color: #fff;
   }
 
   button,
@@ -152,7 +152,7 @@
   a:focus-visible,
   input:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid #8b6f47;
+    outline: 2px solid #D8A73B;
     outline-offset: 3px;
   }
 }
@@ -191,6 +191,6 @@
 }
 
 ::selection {
-  background: #8b6f47;
-  color: #faf8f5;
+  background: #D8A73B;
+  color: #1A1A1A;
 }
