@@ -28,6 +28,10 @@ export function EmptyStripArt() {
   return <div className="grid aspect-[3/4] w-full grid-cols-2 gap-1 border border-foreground bg-background p-2"><span className="bg-[#d7d7d7]" /><span className="bg-[#9d9d9d]" /><span className="bg-[#eeeeee]" /><span className="bg-[#b8b8b8]" /></div>;
 }
 
+export function Skeleton({ className = '' }: { className?: string }) {
+  return <div className={`animate-pulse bg-muted ${className}`} aria-label="loading" />;
+}
+
 export function StripPreview({ photos, note, placement, filter = 'mono', compact = false }: { photos: string[]; note: string; placement: 'front' | 'back'; filter: 'mono' | 'sepia'; compact?: boolean }) {
   const count = Math.max(photos.length, 1);
   return <div className={`shrink-0 border border-foreground bg-background ${compact ? 'w-[122px] p-1.5' : 'w-[min(82vw,330px)] p-2.5'}`}><div className={`grid gap-1 ${count > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>{photos.length ? photos.map((photo, index) => <img key={`${photo}-${index}`} src={photo} alt={`captured frame ${index + 1}`} className={`aspect-[4/3] w-full object-cover ${filter === 'mono' ? 'grayscale' : 'sepia'}`} data-testid={`img-strip-photo-${index}`} />) : <div className="aspect-[4/3] bg-muted" />}</div><div className={`min-h-12 px-1 py-2 ${placement === 'back' ? 'text-right' : ''}`}><p className="text-xs font-medium leading-tight">{note || ' '}</p></div></div>;
