@@ -9,9 +9,7 @@
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
   "private": true,
-  "dependencies": {
-    "@replit/connectors-sdk": "^0.4.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@rollup/rollup-win32-x64-msvc": "4.63.1",
     "prettier": "^3.9.6",
