@@ -1,6 +1,6 @@
 {
   "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "pnpm --filter @workspace/larapel run build",
+  "buildCommand": "pnpm --filter @workspace/db run push-force && pnpm --filter @workspace/larapel run build",
   "outputDirectory": "artifacts/larapel/public",
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
