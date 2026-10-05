@@ -1,5 +1,9 @@
-import app from '../artifacts/api-server/src/app.js';
+import type { IncomingMessage, ServerResponse } from 'http';
 
-// Vercel invokes the Express app as a serverless function. The catch-all
-// filename preserves the original /api/* request path for Express routing.
-export default app;
+export default async function handler(
+  req: IncomingMessage,
+  res: ServerResponse,
+) {
+  const { default: app } = await import('../artifacts/api-server/src/app.js');
+  return app(req, res);
+}
